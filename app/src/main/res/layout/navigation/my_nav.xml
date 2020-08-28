@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/toDoListFragment">
+
+    <fragment
+        android:id="@+id/toDoListFragment"
+        android:name="com.example.note.fragments.list.ToDoListFragment"
+        android:label="fragment_to_do_list"
+        tools:layout="@layout/fragment_to_do_list" >
+
+        <action
+            android:id="@+id/action_toDoListFragment_to_addNoteFragment2"
+            app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/action_toDoListFragment_to_updateNotesFragment2"
+            app:destination="@id/updateNotesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="com.example.note.fragments.add.AddNoteFragment"
+        android:label="fragment_add_note"
+        tools:layout="@layout/fragment_add_note" >
+
+        <action
+            android:id="@+id/action_addNoteFragment_to_toDoListFragment2"
+            app:destination="@id/toDoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateNotesFragment"
+        android:name="com.example.note.fragments.update.UpdateNotesFragment"
+        android:label="fragment_update_notes"
+        tools:layout="@layout/fragment_update_notes" >
+
+        <action
+            android:id="@+id/action_updateNotesFragment_to_toDoListFragment2"
+            app:destination="@id/toDoListFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,59 @@
+package com.ankitamoundekar.todoapp.data.todoViewModel
+
+import android.app.Application
+import android.text.TextUtils
+import android.view.View
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import com.ankitamoundekar.todoapp.R
+import com.ankitamoundekar.todoapp.data.model.Priority
+import com.ankitamoundekar.todoapp.data.model.ToDoData
+import java.text.FieldPosition
+
+class SharedViewModel(application: Application):AndroidViewModel(application)
+{
+    var emptyDatabase:MutableLiveData<Boolean> = MutableLiveData(false)
+
+    fun checkIfDataBaseIsEmpty(todoData:List<ToDoData>)
+    {
+        emptyDatabase.value=todoData.isEmpty()
+    }
+
+    val listner: AdapterView.OnItemSelectedListener = object:AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            when(position)
+            {
+                0 ->{(parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application,R.color.red))}
+                1 ->{(parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application,R.color.yellow))}
+                2 ->{(parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application,R.color.green))}
+            }
+        }
+    }
+
+     fun verifyDataFromUser(tittle: String, description: String): Boolean {
+        return if(TextUtils.isEmpty(tittle) || TextUtils.isEmpty(description)){
+            false
+        }else !(tittle.isEmpty() || description.isEmpty())
+    }
+
+     fun parsePriority(mPriority: String): Priority {
+        return when(mPriority)
+        {
+            "High Priority" -> {
+                Priority.HIGH}
+            "Medium Priority" -> {
+                Priority.MEDIUM}
+            "Low Priority" -> {
+                Priority.LOW}
+            else -> {
+                Priority.LOW}
+        }
+    }
+}
